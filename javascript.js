@@ -14,18 +14,6 @@ function getComputerChoice() {
     }
 }
 
-//convert human choice to lower case and return it
-function getHumanChoice(choice){
-    if (choice.toLowerCase()=='rock')
-        return 'rock';
-    else if (choice.toLowerCase()=='paper')
-        return 'paper';
-    else if (choice.toLowerCase()=='scissors')
-        return 'scissors';
-    else
-        return false;
-}
-
 //find winner computer vs human 
 function playRound(computerChoice,humanChoice){
     let result=findWinner(computerChoice, humanChoice, 'rock', 'scissors');
@@ -44,7 +32,7 @@ function playRound(computerChoice,humanChoice){
     return result;
 }
 
-//compare human and computer choices to winning and loosing values to find a winner for specific pair of human/computer choices
+//compare human and computer choices to winning and loosing values to find a winner for a specific pair of human/computer choices
 function findWinner(computerChoice, humanChoice, winningValue, loosingValue){
     if ((computerChoice==winningValue) && (humanChoice==loosingValue)){ 
         ++computerScore;
@@ -58,22 +46,46 @@ function findWinner(computerChoice, humanChoice, winningValue, loosingValue){
         return false;
 }
 
+let buttonsParent=document.querySelector("#buttons");
+let gameDiv=document.querySelector("#gameDiv");
+//following for the output on the page
+let userGuess=document.querySelector('.userGuess');
+let computerGuess=document.querySelector(".computerGuess");
+let roundWinner=document.querySelector(".roundWinner");
+let scores=document.querySelector(".scores");
+
 let humanScore=0;
 let computerScore=0;
-console.log("*****Welcome to the Rock, Paper, Scissors Game!*****")
-console.log("Score: Computer / Human");
-console.log(`              ${computerScore} / ${humanScore}`);
-for (let i=0; i<5; i++){    //play 5 rounds
-    let humanChoice=prompt('Enter your choice (rock, paper or scissors):');
-    let computerChoice=getComputerChoice(); //get computer choice
-    humanChoice=getHumanChoice(humanChoice); //rewrite human input in lower case, or return false if it's invalid
-    if (humanChoice) {
-        console.log("Choices: Computer / Human");
-        console.log(`             ${computerChoice} / ${humanChoice}`);
-        playRound(computerChoice, humanChoice);
-        console.log("Score: Computer / Human");
-        console.log(`              ${computerScore} / ${humanScore}`);
-        console.log("----------");}
-    else    
-        console.log('Please enter correct human choice.')
-}
+
+buttonsParent.addEventListener('click',(event) =>{
+    let userGuessNode=document.createElement('p');
+    let computerGuessNode=document.createElement('p');
+    let roundWinnerNode=document.createElement('p');
+    let scoresNode=document.createElement('p');
+
+    let computerChoice=getComputerChoice();
+    let humanChoice=event.target.id;
+
+    switch (humanChoice) {
+        case 'rock':
+            userGuessNode.textContent="Rock";
+            break;
+        case 'paper':
+            userGuessNode.textContent="Paper";
+            break;
+        case 'scissors':
+            userGuessNode.textContent="Scissors";
+            break;
+    }
+    computerGuessNode.textContent=computerChoice;
+    roundWinnerNode.textContent=playRound(computerChoice, humanChoice);
+    if (roundWinnerNode.textContent=='Cant find who the winner is.') {
+        userGuessNode.textContent="??";
+    }
+    scoresNode.textContent=`${computerScore} / ${humanScore}`;
+
+    userGuess.appendChild(userGuessNode);
+    computerGuess.appendChild(computerGuessNode);
+    roundWinner.appendChild(roundWinnerNode);
+    scores.appendChild(scoresNode);
+});
