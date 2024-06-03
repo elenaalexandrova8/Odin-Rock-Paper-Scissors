@@ -1,25 +1,145 @@
-h1, h2 {
+@font-face {
+    font-family: 'myFont'; /*a name to be used later*/
+    src:url("./fonts/dooodleista.ttf"); /*URL to font*/
+}
+
+body {
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0px;
+    height: 100vh;
+    width: 100vw;
+    font-family: 'myFont';
+}
+
+h1 {
+    height: 20vh;
+    font-size: 10vh;
     display:flex;
     align-items: center;
     justify-content: center;
+    margin: 0px;
+
 }
 
-#gameDiv {
+.guessesContainer {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    margin-left:100px;
-    margin-right:100px;
+    justify-content:  center;
 }
 
-#buttons {
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px 0px 20px;
-}
-
-.userGuess, .computerGuess, .roundWinner, .scores {
+.userGuess, .computerGuess {
     display: flex;
     flex-direction: column;
+    align-items:center;
+    justify-content: flex-start;
+    width:45vw;
+}
+
+h2 {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+    font-size: 5vh;
+    margin:0px;
+    padding: 0px;
+}
+
+.userGuessImageContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+
+.userGuessImage {
+    width: 15vw;
+    height:15vw;
+    border-radius: 7%;
+}
+
+.imgComputerGuess {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 15vw;
+    height: 15vw;
+    border-radius: 7%;
+}
+
+.showRoundWinner {
+    display: flex;
+    height: 10vh;
+    font-size: 5vh;
+    margin:0px;
+    padding: 0px;
+    align-items: center;
+}
+
+.scores {
+    display: flex;
+    margin:-6vh 0px 0px 0px;
+    padding: 0px;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    font-size: 10vh;
+}
+
+.footer {
+    display: flex;
+    background-color: lightpink;
+    align-items: center;
+    justify-content: flex-end;
+    height: 3vh;
+    width:100vw;
+    margin-top: auto;
+}
+
+.footer-text{
+    font-size: 2vh;
+    padding: 0px;
+    margin: 0px 20px 0px;
+}
+
+.fade-out-text {
+    animation: fadeOut 3s;
+    -webkit-animation: fadeOut 3s;
+    -moz-animation: fadeOut 3s;
+    -o-animation: fadeOut 3s;
+    -ms-animation: fadeOut 3s;
+    animation-fill-mode: forwards;
+  }
+  
+  @keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+  
+  @-moz-keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  @-webkit-keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+  
+  @-o-keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+  
+  @-ms-keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+
+  @font-face {
+    font-family: 'custom-font'; /*a name to be used later*/
+    src: 'fonts/dooodleista.ttf'; /*URL to font*/
 }

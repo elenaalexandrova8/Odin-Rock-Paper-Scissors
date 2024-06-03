@@ -15,7 +15,7 @@ function getComputerChoice() {
 }
 
 //find winner computer vs human 
-function playRound(computerChoice,humanChoice){
+function playRound(computerChoice,humanChoice,computerScore, humanScore){
     let result=findWinner(computerChoice, humanChoice, 'rock', 'scissors');
     if (result==false) {
         result=findWinner(computerChoice, humanChoice, 'scissors', 'paper');
@@ -36,56 +36,92 @@ function playRound(computerChoice,humanChoice){
 function findWinner(computerChoice, humanChoice, winningValue, loosingValue){
     if ((computerChoice==winningValue) && (humanChoice==loosingValue)){ 
         ++computerScore;
-        return "computer wins";}
+        return "Computer gets a point";}
     else if ((computerChoice==loosingValue) && (humanChoice==winningValue)){
         ++humanScore;
-        return "human wins";}
+        return "You get a point";}
     else if (computerChoice==humanChoice)
-        return "it's a tie";
-    else 
+        return "it is a tie";
+    else
         return false;
 }
 
-let buttonsParent=document.querySelector("#buttons");
-let gameDiv=document.querySelector("#gameDiv");
-//following for the output on the page
-let userGuess=document.querySelector('.userGuess');
-let computerGuess=document.querySelector(".computerGuess");
-let roundWinner=document.querySelector(".roundWinner");
-let scores=document.querySelector(".scores");
+//remove borders from images clicked before
+function removeOutline(){
+    userGuessImages.forEach((element)=>element.setAttribute('style', 'outline:none'));
+}
+
+function addOutline(event){
+    event.target.setAttribute('style', 'outline: 10px solid; outline-offset: -10px;');
+    event.target.style.color=getRandomColor();
+}
+
+//update computer guess image according to computerChoice variable
+function updateComputerGuessImg(imgComputerGuess, computerChoice){
+    switch (computerChoice) {
+        case 'rock':
+            imgComputerGuess.src='img/rock.png';
+            break;
+        case 'paper':
+            imgComputerGuess.src='img/paper.png';
+            break;
+        case 'scissors':
+            imgComputerGuess.src='img/scissors.png';
+            break;
+    }
+}
+
+function displayRoundWinner(currentRoundWinner){
+    const showRoundWinner=document.querySelector('.showRoundWinner');
+    showRoundWinner.textContent=currentRoundWinner;
+    document.getAnimations().forEach((anim)=>{anim.cancel();anim.play()}); 
+}
+
+function userGuessImageClicked(event){
+    let imgComputerGuess=document.querySelector('.imgComputerGuess');
+    let showScores=document.querySelector('.showScores');
+    let currentRoundWinner='';
+
+    let computerChoice=getComputerChoice();
+    updateComputerGuessImg(imgComputerGuess, computerChoice);
+    
+    let humanChoice=event.target.id;
+    switch (humanChoice) {
+        case 'rock':
+            removeOutline();
+            addOutline(event);
+            break;
+        case 'paper':
+            removeOutline();
+            addOutline(event);
+            break;
+        case 'scissors':
+            removeOutline();
+            addOutline(event);
+            break;
+    }
+    var popSound=new Audio('sound/pop.mp3');
+    popSound.play();
+
+    currentRoundWinner=playRound(computerChoice, humanChoice);
+    displayRoundWinner(currentRoundWinner);
+    showScores.textContent=`${humanScore} : ${computerScore}`;
+}
+
+function getRandomColor() {
+    var letters = '0123456789ABCDEF'.split('');
+    var color = '#';
+    for (var i = 0; i < 6; i++ ) {
+        color += letters[Math.round(Math.random() * 15)];
+    }
+    return color;
+}
+
+
+let userGuessImages=document.querySelectorAll(".userGuessImage");
 
 let humanScore=0;
 let computerScore=0;
 
-buttonsParent.addEventListener('click',(event) =>{
-    let userGuessNode=document.createElement('p');
-    let computerGuessNode=document.createElement('p');
-    let roundWinnerNode=document.createElement('p');
-    let scoresNode=document.createElement('p');
-
-    let computerChoice=getComputerChoice();
-    let humanChoice=event.target.id;
-
-    switch (humanChoice) {
-        case 'rock':
-            userGuessNode.textContent="Rock";
-            break;
-        case 'paper':
-            userGuessNode.textContent="Paper";
-            break;
-        case 'scissors':
-            userGuessNode.textContent="Scissors";
-            break;
-    }
-    computerGuessNode.textContent=computerChoice;
-    roundWinnerNode.textContent=playRound(computerChoice, humanChoice);
-    if (roundWinnerNode.textContent=='Cant find who the winner is.') {
-        userGuessNode.textContent="??";
-    }
-    scoresNode.textContent=`${computerScore} / ${humanScore}`;
-
-    userGuess.appendChild(userGuessNode);
-    computerGuess.appendChild(computerGuessNode);
-    roundWinner.appendChild(roundWinnerNode);
-    scores.appendChild(scoresNode);
-});
+userGuessImages.forEach((element)=>
+element.addEventListener('click',userGuessImageClicked));

@@ -8,18 +8,28 @@
 </head>
 <body>
     <h1>Rock Paper Scissors Game</h1>
-    <h2>User VS Computer</h2>
-    <div id="buttons">
-        <label>User, select your guess:</label>
-        <button id="rock">Rock</button>
-        <button id="paper">Paper</button>
-        <button id="scissors">Scissors</button>
+    <div class="guessesContainer">
+        <div class="userGuess">
+            <h2>You</h2>
+            <div class="userGuessImageContainer">
+                <img class="userGuessImage" id="rock" alt="rock image" src="img/rock.png">
+                <img class="userGuessImage" id="paper" alt="paper image" src="img/paper.png">
+                <img class="userGuessImage" id="scissors" alt="scissors image" src="img/scissors.png">
+            </div>
+        </div>
+        <div class="computerGuess">
+            <h2>Computer</h2>
+            <img class='imgComputerGuess' alt="computer guess">
+        </div>
     </div>
-    <div id="gameDiv">
-        <div class="userGuess">User</div>
-        <div class="computerGuess">Computer</div>
-        <div class="roundWinner">Round winner</div>
-        <div class="scores">Score: Computer/User</div>
+    <div class="currentRoundWinner">
+        <p class="showRoundWinner fade-out-text">Current round winner</p>
+    </div>
+    <div class="scores">
+        <p class="showScores">0:0</p>
+    </div>
+    <div class="footer">
+        <p class="footer-text">Created by Elena A</p>
     </div>
 </body>
 </html>
