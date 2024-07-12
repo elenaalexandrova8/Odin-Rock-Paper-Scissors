@@ -1,145 +1,140 @@
-@font-face {
-    font-family: 'myFont'; /*a name to be used later*/
-    src:url("./fonts/dooodleista.ttf"); /*URL to font*/
+.on-mouse-hover{
+    background-color:aqua;
 }
 
-body {
-    display:flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    margin: 0px;
+body{
     height: 100vh;
     width: 100vw;
-    font-family: 'myFont';
+    display: flex;
+    flex-direction: column;
+    padding:0px;
+    margin: 0px;
 }
 
 h1 {
-    height: 20vh;
-    font-size: 10vh;
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0px;
-
+    align-self: center;
 }
 
-.guessesContainer {
+.content-container {
     display: flex;
     flex-direction: row;
-    justify-content:  center;
+    padding:0px;
+    margin: 0px;
 }
 
-.userGuess, .computerGuess {
+.controls-container{
     display: flex;
     flex-direction: column;
-    align-items:center;
     justify-content: flex-start;
-    width:45vw;
+    align-items: center;
+    margin-left: 20px;
+    flex: 1 0 10vw;
 }
 
-h2 {
+.grid-range-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin-right: 30px;
+    flex: 9 0 90vw;
+}
+
+.grid-container{
+    flex-direction: column;
     display:flex;
+    flex-wrap: wrap;
+    margin: 0px;
     justify-content: center;
     align-items: center;
-    height: 10vh;
-    font-size: 5vh;
-    margin:0px;
-    padding: 0px;
+    flex: 0 0 auto;
 }
 
-.userGuessImageContainer {
+.color-picker-container{
+    display:flex;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+#color-canvas{
+    margin-right: 20px;
+}
+
+.multi-color-slider {
+    height: 300px;
+    width: 40px;
+    background: linear-gradient(hsl(0, 100%, 50%),  hsl(60, 100%, 50%), 
+                                hsl(120, 100%, 50%),hsl(180, 100%, 50%), 
+                                hsl(240, 100%, 50%),hsl(300, 100%, 50%), 
+                                hsl(360, 100%, 50%));
+
+    writing-mode: vertical-lr;
+    direction: ltr;
+
+    -webkit-transition: 0.2s;
+    -webkit-appearance: none;
+    transition: opacity 0.2s;
+}
+
+.multi-color-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 40px;
+    height: 10px;
+    border-radius: 20%;
+    background: lightgray;
+    cursor: pointer;
+}
+
+.multi-color-slider::-moz-range-thumb{
+    width: 40px;
+    height: 10px;
+    border-radius: 20%;
+    background: lightgray;
+    cursor: pointer;
+}
+
+datalist {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: auto;
+    justify-content: space-between;
+    color: black;
+  }
+  
+.grid-size-slider{
+    width:500px;
 }
 
-.userGuessImage {
-    width: 15vw;
-    height:15vw;
-    border-radius: 7%;
+.random-color-button, .fade-button, .clear-button {
+  background-color: #fff;
+  border: 1px solid #d5d9d9;
+  border-radius: 8px;
+  box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
+  box-sizing: border-box;
+  color: #0f1111;
+  display: inline-block;
+  font-size: 13px;
+  line-height: 29px;
+  padding: 0 10px 0 11px;
+  position: relative;
+  text-align: center;
+  vertical-align: middle;
+  width: 140px;
+  margin-bottom: 20px;
 }
 
-.imgComputerGuess {
+.button-pressed{
+    background-color: lightgray;
+}
+
+.button-unpressed{
+    background-color:#fff;
+}
+
+.footer{
     display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 15vw;
-    height: 15vw;
-    border-radius: 7%;
-}
-
-.showRoundWinner {
-    display: flex;
-    height: 10vh;
-    font-size: 5vh;
-    margin:0px;
-    padding: 0px;
-    align-items: center;
-}
-
-.scores {
-    display: flex;
-    margin:-6vh 0px 0px 0px;
-    padding: 0px;
-    flex: 1;
-    align-items: center;
-    justify-content: center;
-    font-size: 10vh;
-}
-
-.footer {
-    display: flex;
-    background-color: lightpink;
-    align-items: center;
-    justify-content: flex-end;
-    height: 3vh;
-    width:100vw;
     margin-top: auto;
-}
-
-.footer-text{
-    font-size: 2vh;
-    padding: 0px;
-    margin: 0px 20px 0px;
-}
-
-.fade-out-text {
-    animation: fadeOut 3s;
-    -webkit-animation: fadeOut 3s;
-    -moz-animation: fadeOut 3s;
-    -o-animation: fadeOut 3s;
-    -ms-animation: fadeOut 3s;
-    animation-fill-mode: forwards;
-  }
-  
-  @keyframes fadeOut {
-    0% { opacity: 1; }
-    100% { opacity: 0; }
-  }
-  
-  @-moz-keyframes fadeIn {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
-  }
-  
-  @-webkit-keyframes fadeOut {
-    0% { opacity: 1; }
-    100% { opacity: 0; }
-  }
-  
-  @-o-keyframes fadeOut {
-    0% { opacity: 1; }
-    100% { opacity: 0; }
-  }
-  
-  @-ms-keyframes fadeOut {
-    0% { opacity: 1; }
-    100% { opacity: 0; }
-  }
-
-  @font-face {
-    font-family: 'custom-font'; /*a name to be used later*/
-    src: 'fonts/dooodleista.ttf'; /*URL to font*/
+    width: 100vw;   
+    background: lightgray;
+    padding:5px;
+    justify-content: center;
 }
